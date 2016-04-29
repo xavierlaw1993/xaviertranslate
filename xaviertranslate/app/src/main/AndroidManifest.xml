@@ -3,6 +3,8 @@
     package="com.xavier.xaviertranslate">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -10,13 +12,26 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".controller.page.TransitActivity"
+            android:theme="@android:style/Theme.NoDisplay">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".controller.page.MainActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.PopUpTheme" />
+
+        <service android:name=".controller.ChatHeadLikeService" />
+
+        <service
+            android:name=".controller.network.ApiRequestService"
+            android:exported="false" />
     </application>
 
 </manifest>

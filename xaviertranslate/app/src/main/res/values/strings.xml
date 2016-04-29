@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">xaviertranslate</string>
+    <string name="app_name">xavier.translate</string>
+    <string name="main__edittext_hint">Enter the phrase you want to translate</string>
+    <string name="main__translate">Translate</string>
 </resources>
