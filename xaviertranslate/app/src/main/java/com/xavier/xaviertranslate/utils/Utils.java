@@ -5,9 +5,12 @@ import android.content.Context;
 import android.graphics.Point;
 import android.os.Build;
 import android.provider.Settings;
+import android.support.design.widget.Snackbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 /**
  * Created by zensis on 29/4/16.
@@ -36,5 +39,17 @@ public class Utils {
         } else {
             return Settings.canDrawOverlays(context);
         }
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        View view = activity.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    public static void showSnackBarMsg(View v, String msg){
+        Snackbar.make(v, msg, Snackbar.LENGTH_SHORT).show();
     }
 }

@@ -3,13 +3,14 @@ package com.xavier.xaviertranslate.view.listcell;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
 import com.xavier.xaviertranslate.R;
-import com.xavier.xaviertranslate.model.Meaning;
+import com.xavier.xaviertranslate.controller.adapter.list.TranslateResultMeaningListAdapter;
 import com.xavier.xaviertranslate.model.TranslateResult;
 
 import roboguice.RoboGuice;
@@ -18,11 +19,11 @@ import roboguice.inject.InjectView;
 /**
  * Created by zensis on 29/4/16.
  */
-public class TranslateResultListCellView extends FrameLayout {
+public class TranslateResultListCellView extends LinearLayout {
     Context context;
 
-    @InjectView(R.id.tv_meaning)
-    TextView tv_meaning;
+    @InjectView(R.id.rv_translateResultMeaningList)
+    RecyclerView rv_translateResultMeaningList;
 
     public TranslateResultListCellView(Context context) {
         super(context);
@@ -53,8 +54,11 @@ public class TranslateResultListCellView extends FrameLayout {
         RoboGuice.getInjector(getContext()).injectViewMembers(this);
     }
 
-    public void bindModel(Meaning meaning) {
-        tv_meaning.setText(meaning.text);
-
+    public void bindModel(TranslateResult translateResult) {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+        TranslateResultMeaningListAdapter adapter =
+                new TranslateResultMeaningListAdapter(translateResult.phrase, translateResult.meanings);
+        rv_translateResultMeaningList.setLayoutManager(layoutManager);
+        rv_translateResultMeaningList.setAdapter(adapter);
     }
 }

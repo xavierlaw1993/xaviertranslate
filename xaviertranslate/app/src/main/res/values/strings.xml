@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">xavier.translate</string>
-    <string name="main__edittext_hint">Enter the phrase you want to translate</string>
+    <string name="main__edittext_hint">Enter the phrase here</string>
     <string name="main__translate">Translate</string>
+    <string name="main__empty_result_hint">Sorry, we cannot find any result from the phase you enter.</string>
+    <string name="main__init_page_hint">Please enter a phrase in order to do the translation</string>
 </resources>

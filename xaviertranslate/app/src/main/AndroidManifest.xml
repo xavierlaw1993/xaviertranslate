@@ -25,7 +25,8 @@
         <activity
             android:name=".controller.page.MainActivity"
             android:launchMode="singleTask"
-            android:theme="@style/AppTheme.PopUpTheme" />
+            android:theme="@style/AppTheme.PopUpTheme"
+            android:windowSoftInputMode="adjustPan" />
 
         <service android:name=".controller.ChatHeadLikeService" />
 

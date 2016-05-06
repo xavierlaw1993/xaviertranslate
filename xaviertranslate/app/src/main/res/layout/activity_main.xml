@@ -10,37 +10,69 @@
         android:id="@+id/ll_content"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="@android:color/white"
+        android:background="@drawable/shape_rect_color_accent_bg_white_border"
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
         android:orientation="vertical">
 
+        <EditText
+            android:id="@+id/et_enterTranslatePhrase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/half_margin"
+            android:background="@drawable/shape_rect_color_accent_border"
+            android:hint="@string/main__edittext_hint"
+            android:paddingLeft="@dimen/half_margin"
+            android:paddingRight="@dimen/half_margin"
+            android:singleLine="true" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/half_margin"
             android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/et_enterTranslatePhrase"
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/half_margin"
-                android:layout_weight="1"
-                android:background="@drawable/shape_rect_color_accent_border"
-                android:hint="@string/main__edittext_hint"
-                android:singleLine="true" />
+            <Spinner
+                android:id="@+id/sp_translate_from"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1" />
+
+            <Spinner
+                android:id="@+id/sp_translate_dest"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1" />
 
             <Button
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
                 android:onClick="onTranslateClick"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="@string/main__translate" />
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_translateResultList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_empty_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="1dp"
+            android:gravity="center"
+            android:padding="@dimen/fab_margin"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/rl_progress_bar"
+            layout="@layout/view_progress_bar" />
     </LinearLayout>
 </LinearLayout>

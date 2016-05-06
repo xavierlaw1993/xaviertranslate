@@ -9,10 +9,12 @@ import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.IBinder;
+import android.support.v4.view.VelocityTrackerCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.VelocityTracker;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -34,26 +36,24 @@ public class ChatHeadLikeService extends Service {
     private Point szWindow = new Point();
     private boolean isLeft = true;
     private String sMsg = "";
+//    private VelocityTracker velocityTracker;
 
     @SuppressWarnings("deprecation")
 
     @Override
     public void onCreate() {
-        // TODO Auto-generated method stub
         super.onCreate();
         Log.v(TAG, "ChatHeadLikeService.onCreate()");
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO Auto-generated method stub
         Log.v(TAG, "ChatHeadService.onBind()");
         return null;
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        // TODO Auto-generated method stub
         Log.d(TAG, "ChatHeadService.onStartCommand() -> startId=" + startId);
 
         if (startId == Service.START_STICKY) {
@@ -66,7 +66,6 @@ public class ChatHeadLikeService extends Service {
 
     @Override
     public void onDestroy() {
-        // TODO Auto-generated method stub
         super.onDestroy();
 
         if (rl_chathead != null) {
@@ -80,7 +79,6 @@ public class ChatHeadLikeService extends Service {
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        // TODO Auto-generated method stub
         super.onConfigurationChanged(newConfig);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -166,7 +164,6 @@ public class ChatHeadLikeService extends Service {
 
                 @Override
                 public void run() {
-                    // TODO Auto-generated method stub
                     Log.d(TAG, "Into runnable_longClick");
 
                     isLongclick = true;
@@ -179,12 +176,22 @@ public class ChatHeadLikeService extends Service {
             public boolean onTouch(View v, MotionEvent event) {
                 WindowManager.LayoutParams layoutParams = (WindowManager.LayoutParams) rl_chathead.getLayoutParams();
 
+                int index = event.getActionIndex();
+//                int pointerId = event.getPointerId(index);
+
                 int x_cord = (int) event.getRawX();
                 int y_cord = (int) event.getRawY();
                 int x_cord_Destination, y_cord_Destination;
 
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
+//                        if (velocityTracker == null) {
+//                            velocityTracker = VelocityTracker.obtain();
+//                        } else {
+//                            velocityTracker.clear();
+//                        }
+//                        velocityTracker.addMovement(event);
+
                         time_start = System.currentTimeMillis();
                         handler_longClick.postDelayed(runnable_longClick, 600);
 
@@ -199,6 +206,10 @@ public class ChatHeadLikeService extends Service {
 
                         break;
                     case MotionEvent.ACTION_MOVE:
+//                        velocityTracker.addMovement(event);
+//                        velocityTracker.computeCurrentVelocity(1000);
+//                        Log.v(TAG, "velocity x="+ VelocityTrackerCompat.getXVelocity(velocityTracker, pointerId));
+
                         int x_diff_move = x_cord - x_init_cord;
                         int y_diff_move = y_cord - y_init_cord;
 
@@ -270,7 +281,6 @@ public class ChatHeadLikeService extends Service {
                             break;
                         }
 
-
                         int x_diff = x_cord - x_init_cord;
                         int y_diff = y_cord - y_init_cord;
 
@@ -295,14 +305,28 @@ public class ChatHeadLikeService extends Service {
                         resetPosition(x_cord);
 
                         break;
+                    case MotionEvent.ACTION_CANCEL:
+//                        velocityTracker.recycle();
+                        break;
                     default:
-                        Log.d(TAG, "chatheadView.setOnTouchListener  -> event.getAction() : default");
+//                        Log.d(TAG, "chatheadView.setOnTouchListener  -> event.getAction() : default");
                         break;
                 }
                 return true;
             }
         });
     }
+
+//    private void setToLeftOrRight(int x_cord_now, float velocity){
+//        if (velocity <= -1000) {
+//            isLeft = true;
+//            moveToLeft(x_cord_now);
+//
+//        } else if(velocity >= 1000) {
+//            isLeft = false;
+//            moveToRight(x_cord_now);
+//        }
+//    }
 
     private void resetPosition(int x_cord_now) {
         if (x_cord_now <= szWindow.x / 2) {
@@ -312,9 +336,7 @@ public class ChatHeadLikeService extends Service {
         } else {
             isLeft = false;
             moveToRight(x_cord_now);
-
         }
-
     }
 
     private void moveToLeft(final int x_cord_now) {
