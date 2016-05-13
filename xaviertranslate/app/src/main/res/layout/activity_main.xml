@@ -22,8 +22,7 @@
             android:layout_margin="@dimen/half_margin"
             android:background="@drawable/shape_rect_color_accent_border"
             android:hint="@string/main__edittext_hint"
-            android:paddingLeft="@dimen/half_margin"
-            android:paddingRight="@dimen/half_margin"
+            android:padding="@dimen/half_margin"
             android:singleLine="true" />
 
         <LinearLayout
@@ -34,18 +33,18 @@
             <Spinner
                 android:id="@+id/sp_translate_from"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="45dp"
                 android:layout_weight="1" />
 
             <Spinner
                 android:id="@+id/sp_translate_dest"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="45dp"
                 android:layout_weight="1" />
 
             <Button
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="45dp"
                 android:layout_weight="1"
                 android:onClick="onTranslateClick"
                 android:text="@string/main__translate" />
