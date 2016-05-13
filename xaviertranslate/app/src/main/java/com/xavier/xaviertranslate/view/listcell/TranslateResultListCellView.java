@@ -56,8 +56,9 @@ public class TranslateResultListCellView extends LinearLayout {
 
     public void bindModel(TranslateResult translateResult) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
-        TranslateResultMeaningListAdapter adapter =
-                new TranslateResultMeaningListAdapter(translateResult.phrase, translateResult.meanings);
+        TranslateResultMeaningListAdapter adapter = new TranslateResultMeaningListAdapter(
+                translateResult.phrase,
+                translateResult.meanings);
         rv_translateResultMeaningList.setLayoutManager(layoutManager);
         rv_translateResultMeaningList.setAdapter(adapter);
     }

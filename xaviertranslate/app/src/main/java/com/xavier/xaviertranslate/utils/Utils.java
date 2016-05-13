@@ -21,6 +21,9 @@ public class Utils {
     public static int screenWidth = 0;
     public static int screenHeight = 0;
 
+    public static String langFrom = "eng";
+    public static String langDest = "eng";
+
     public static void getScreenSize(Activity context) {
         Display display = context.getWindowManager().getDefaultDisplay();
         Point size = new Point();

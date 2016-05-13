@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.xavier.xaviertranslate.R;
 import com.xavier.xaviertranslate.model.Meaning;
+import com.xavier.xaviertranslate.utils.Utils;
 
 import roboguice.RoboGuice;
 import roboguice.inject.InjectView;
@@ -55,10 +56,13 @@ public class TranslateResultMeaningListCellView extends LinearLayout {
     }
 
     public void bindModel(Meaning meaning, boolean isPhrase) {
+//        if (!Utils.langDest.equals(meaning.language))
+//            tv_meaning.setPaintFlags(tv_meaning.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         if (isPhrase) {
             tv_meaning.setText(Html.fromHtml(meaning.text));
             tv_meaning.setTextColor(getResources().getColor(R.color.colorAccent));
             tv_meaning.setPaintFlags(tv_meaning.getPaintFlags() | Paint.FAKE_BOLD_TEXT_FLAG);
+
         } else {
             tv_meaning.setText(Html.fromHtml(meaning.text));
             tv_meaning.setPaintFlags(tv_meaning.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);

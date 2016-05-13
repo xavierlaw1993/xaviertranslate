@@ -12,9 +12,6 @@ import java.util.List;
  * Created by zensis on 6/5/16.
  */
 public class TranslateResultMeaningListAdapter extends AbsListAdapter<TranslateResultMeaningListAdapter.TranslateResultMeaningViewHolder> {
-    private static final int TYPE_PHRASE = 1;
-    private static final int TYPE_MEANING = 2;
-
     Meaning phrase;
     List<Meaning> meanings;
 
